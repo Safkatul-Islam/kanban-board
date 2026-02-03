@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  display: flex;
+  gap: 2rem;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 95%;
+  max-width: 1600px;
+}
+
+.todo, .doing, .done {
+  flex: 1;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 500px;
+  min-width: 280px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.todo:hover, .doing:hover, .done:hover {
+  transform: translateY(-2px);
+}
+
+.todo {
+  border-top: 4px solid #ff6b6b;
+}
+
+.doing {
+  border-top: 4px solid #4ecdc4;
+}
+
+.done {
+  border-top: 4px solid #95e1d3;
+}
+
+.todo h2, .doing h2, .done h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3436;
+  text-align: center;
+}
+
+.task-title {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  font-weight: 500;
+  color: #2d3436;
+}
+
+.task-title:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(4px);
+}
+
+.todo .task-title {
+  border-left-color: #ff6b6b;
+}
+
+.todo .task-title:hover {
+  background: #fff5f5;
+}
+
+.doing .task-title {
+  border-left-color: #4ecdc4;
+}
+
+.doing .task-title:hover {
+  background: #f0fffe;
+}
+
+.done .task-title {
+  border-left-color: #95e1d3;
+  opacity: 0.8;
+  text-decoration: line-through;
+}
+
+.done .task-title:hover {
+  background: #f0fff4;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .board {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .todo, .doing, .done {
+    min-height: auto;
+    min-width: auto;
+  }
+}
