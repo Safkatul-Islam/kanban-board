@@ -7,32 +7,50 @@ function TaskBoard() {
     { id: 3, title: "Master JS", status: "done" },
   ]);
 
+  const [draggedTaskId, setDraggedTaskId] = useState(null);
+
+  const columns = ["todo", "doing", "done"];
+
+  const handleDrop = (event, newStatus) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === draggedTaskId ? { ...task, status: newStatus } : task,
+      ),
+    );
+  };
+
   return (
     <div className="board">
-      <div className="todo">
-        <h2>Todo</h2>
-        {tasks
-          .filter((task) => task.status === "todo")
-          .map((task) => (
-            <div key={task.id} className="task-title">{task.title}</div>
-          ))}
-      </div>
-      <div className="doing">
-        <h2>Doing</h2>
-        {tasks
-          .filter((task) => task.status === "doing")
-          .map((task) => (
-            <div key={task.id} className="task-title">{task.title}</div>
-          ))}
-      </div>
-      <div className="done">
-        <h2>Done</h2>
-        {tasks
-          .filter((task) => task.status === "done")
-          .map((task) => (
-            <div key={task.id} className="task-title">{task.title}</div>
-          ))}
-      </div>
+      {columns.map((column) => (
+        <div
+          className={column}
+          key={column}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => handleDrop(e, column)}
+        >
+          <h2>{column.charAt(0).toUpperCase() + column.slice(1)}</h2>
+          {tasks.filter((task) => task.status === column).length === 0 ? (
+            <p
+              style={{ textAlign: "center", color: "#999", marginTop: "2rem" }}
+            >
+              No Tasks
+            </p>
+          ) : (
+            tasks
+              .filter((task) => task.status === column)
+              .map((task) => (
+                <div
+                  key={task.id}
+                  className="task-title"
+                  draggable={true}
+                  onDragStart={(e) => setDraggedTaskId(task.id)}
+                >
+                  {task.title}
+                </div>
+              ))
+          )}
+        </div>
+      ))}
     </div>
   );
 }
