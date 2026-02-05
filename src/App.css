@@ -21,6 +21,7 @@ body {
 
 .board {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
   padding: 2.5rem;
   background: rgba(255, 255, 255, 0.95);
@@ -28,6 +29,87 @@ body {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 95%;
   max-width: 1600px;
+}
+
+/* Task Form Styles */
+form {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  align-items: center;
+}
+
+form input[type="text"] {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.2s ease;
+  color: #2d3436;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+form input[type="text"]:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+form input[type="text"]::placeholder {
+  color: #a0a0a0;
+}
+
+form select {
+  padding: 0.875rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+  color: #2d3436;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  min-width: 120px;
+}
+
+form select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+form button {
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  white-space: nowrap;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+form button:active {
+  transform: translateY(0);
+}
+
+/* Columns Container */
+.columns-wrapper {
+  display: flex;
+  gap: 2rem;
 }
 
 .todo, .doing, .done {
@@ -112,8 +194,20 @@ body {
 
 @media (max-width: 768px) {
   .board {
-    flex-direction: column;
     width: 100%;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  form select,
+  form button {
+    width: 100%;
+  }
+
+  .columns-wrapper {
+    flex-direction: column;
   }
   
   .todo, .doing, .done {
