@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TaskForm from "./TaskForm";
 
 function TaskBoard() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Learn React", status: "todo" },
-    { id: 2, title: "Practice State", status: "doing" },
-    { id: 3, title: "Master JS", status: "done" },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+    return [
+      { id: 1, title: "Learn React", status: "todo" },
+      { id: 2, title: "Practice State", status: "doing" },
+      { id: 3, title: "Master JS", status: "done" },
+    ];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const [draggedTaskId, setDraggedTaskId] = useState(null);
 
