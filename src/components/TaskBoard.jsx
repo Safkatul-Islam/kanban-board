@@ -20,6 +20,8 @@ function TaskBoard() {
 
   const [draggedTaskId, setDraggedTaskId] = useState(null);
 
+  const [dragOverColumn, setDragOverColumn] = useState(null);
+
   const columns = ["todo", "doing", "done"];
 
   const handleDrop = (event, newStatus) => {
@@ -28,10 +30,21 @@ function TaskBoard() {
         task.id === draggedTaskId ? { ...task, status: newStatus } : task,
       ),
     );
+    setDraggedTaskId(null);
+    setDragOverColumn(null);
   };
 
   const onAddTask = (task) => {
     setTasks((prev) => [...prev, task]);
+  };
+
+  const handleDragStart = (taskId) => {
+    setDraggedTaskId(taskId);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedTaskId(null);
+    setDragOverColumn(null);
   };
 
   return (
@@ -41,9 +54,13 @@ function TaskBoard() {
       <div className="columns-wrapper">
         {columns.map((column) => (
           <div
-            className={column}
+            className={`${column} ${dragOverColumn === column ? "drag-over" : ""}`}
             key={column}
-            onDragOver={(e) => e.preventDefault()}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragOverColumn(column);
+            }}
+            onDragLeave={() => setDragOverColumn(null)}
             onDrop={(e) => handleDrop(e, column)}
           >
             <h2>{column.charAt(0).toUpperCase() + column.slice(1)}</h2>
@@ -63,9 +80,10 @@ function TaskBoard() {
                 .map((task) => (
                   <div
                     key={task.id}
-                    className="task-title"
+                    className={`task-title ${draggedTaskId === task.id ? "dragging" : ""}`}
                     draggable={true}
-                    onDragStart={(e) => setDraggedTaskId(task.id)}
+                    onDragStart={() => handleDragStart(task.id)}
+                    onDragEnd={handleDragEnd}
                   >
                     {task.title}
                   </div>
