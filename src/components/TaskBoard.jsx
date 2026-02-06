@@ -42,11 +42,6 @@ function TaskBoard() {
     setDraggedTaskId(taskId);
   };
 
-  const handleDragEnd = () => {
-    setDraggedTaskId(null);
-    setDragOverColumn(null);
-  };
-
   return (
     <div className="board">
       <TaskForm onAddTask={onAddTask} />
@@ -83,7 +78,6 @@ function TaskBoard() {
                     className={`task-title ${draggedTaskId === task.id ? "dragging" : ""}`}
                     draggable={true}
                     onDragStart={() => handleDragStart(task.id)}
-                    onDragEnd={handleDragEnd}
                   >
                     {task.title}
                   </div>

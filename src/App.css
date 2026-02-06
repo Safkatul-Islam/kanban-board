@@ -130,9 +130,9 @@ form button:active {
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
 }
 
-.todo:hover, .doing:hover, .done:hover {
+/* .todo:hover, .doing:hover, .done:hover {
   transform: translateY(-2px);
-}
+} */
 
 .todo {
   border-top: 4px solid #ff6b6b;
@@ -172,15 +172,21 @@ form button:active {
 }
 
 .task-title.dragging {
-  opacity: 0.5;
-  transform: scale(0.95);
+  opacity: 0.4;
+  transform: scale(0.98) rotate(2deg);
   cursor: grabbing;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.task-title:hover {
+.task-title:not(.dragging):hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateX(4px);
 }
+
+/* .task-title:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(4px);
+} */
 
 .todo .task-title {
   border-left-color: #ff6b6b;
