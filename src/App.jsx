@@ -4,7 +4,9 @@ import TaskBoard from './components/TaskBoard'
 function App() {
 
   return (
-    <TaskBoard />
+    <div>
+      <h1>Router is working</h1>
+    </div>
   )
 }
 
